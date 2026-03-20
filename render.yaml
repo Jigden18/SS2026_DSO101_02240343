@@ -1,35 +1,52 @@
 # render.yaml — Render Blueprint
-# On every git push to main, Render rebuilds and redeploys automatically.
+# On every git push to main, Render rebuilds and redeploys all services.
 
 services:
+
+  # ── BACKEND ──────────────────────────────────────────────────────────────
   - type: web
     name: be-todo
     env: docker
-    dockerfilePath: Dockerfile
+    # Paths are relative to the repo root, not the project folder
+    dockerfilePath: ./JigdenShakya_02240343_DSO101_A1/backend/Dockerfile
     dockerContext: ./JigdenShakya_02240343_DSO101_A1/backend
     plan: free
     envVars:
+      # Auto-injected from the todo-db database below — no manual copy needed
       - key: DATABASE_URL
-        value: postgresql://todo_db_0lmo_user:PtZoowQdGtYB2Ydz8ozyCXmmWsUBwWEn@dpg-d6rb1q9j16oc73f48tgg-a.singapore-postgres.render.com/todo_db_0lmo
+        fromDatabase:
+          name: todo-db
+          property: connectionString
       - key: PORT
         value: 5000
       - key: NODE_ENV
         value: production
+      # Auto-wired from the fe-todo service host
       - key: FRONTEND_URL
         fromService:
           name: fe-todo
           type: web
           property: host
 
+  # ── FRONTEND ─────────────────────────────────────────────────────────────
   - type: web
     name: fe-todo
     env: docker
-    dockerfilePath: Dockerfile
+    dockerfilePath: ./JigdenShakya_02240343_DSO101_A1/frontend/Dockerfile
     dockerContext: ./JigdenShakya_02240343_DSO101_A1/frontend
     plan: free
+
+    # NEXT_PUBLIC_API_URL is hardcoded as ENV in the frontend Dockerfile instead.
     envVars:
       - key: NEXT_PUBLIC_API_URL
         fromService:
           name: be-todo
           type: web
           property: host
+
+# ── DATABASE ─────────────────────────────────────────────────────────────
+databases:
+  - name: todo-db
+    plan: free
+    databaseName: todo_db
+    user: postgres
