@@ -1,17 +1,14 @@
 # render.yaml — Render Blueprint
-# This file tells Render how to build and deploy all services.
 # On every git push to main, Render rebuilds and redeploys automatically.
 
 services:
-  # BACKEND 
   - type: web
     name: be-todo
     env: docker
-    dockerfilePath: ./JigdenShakya_02240343_DSO101_A1/backend/Dockerfile
+    dockerfilePath: Dockerfile
     dockerContext: ./JigdenShakya_02240343_DSO101_A1/backend
     plan: free
     envVars:
-      # DATABASE_URL is auto-injected from the todo-db database below.
       - key: DATABASE_URL
         fromDatabase:
           name: todo-db
@@ -20,18 +17,16 @@ services:
         value: 5000
       - key: NODE_ENV
         value: production
-      # FRONTEND_URL is auto-wired from the fe-todo service URL.
       - key: FRONTEND_URL
         fromService:
           name: fe-todo
           type: web
           property: host
 
-  # FRONTEND 
   - type: web
     name: fe-todo
     env: docker
-    dockerfilePath: ./JigdenShakya_02240343_DSO101_A1/frontend/Dockerfile
+    dockerfilePath: Dockerfile
     dockerContext: ./JigdenShakya_02240343_DSO101_A1/frontend
     plan: free
     envVars:
@@ -41,7 +36,6 @@ services:
           type: web
           property: host
 
-# DATABASE 
 databases:
   - name: todo-db
     plan: free
