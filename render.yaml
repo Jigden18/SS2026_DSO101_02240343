@@ -35,7 +35,6 @@ services:
     dockerfilePath: ./JigdenShakya_02240343_DSO101_A1/frontend/Dockerfile
     dockerContext: ./JigdenShakya_02240343_DSO101_A1/frontend
     plan: free
-
     # NEXT_PUBLIC_API_URL is hardcoded as ENV in the frontend Dockerfile instead.
     envVars:
       - key: NEXT_PUBLIC_API_URL
