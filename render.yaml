@@ -46,4 +46,4 @@ databases:
   - name: todo-db
     plan: free
     databaseName: todo_db
-    user: postgres
+    user: todo_db_0lmo_user
