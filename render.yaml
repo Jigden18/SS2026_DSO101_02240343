@@ -1,51 +1,47 @@
 # render.yaml — Render Blueprint
-# On every git push to main, Render rebuilds and redeploys all services.
+# On every git push to main, Render rebuilds and redeploys automatically.
 
 services:
-
   # ── BACKEND ──────────────────────────────────────────────────────────────
   - type: web
-    name: be-todo
-    env: docker
-    # Paths are relative to the repo root, not the project folder
+    name: be-todo-github
+    runtime: docker
+    branch: main
     dockerfilePath: ./JigdenShakya_02240343_DSO101_A1/backend/Dockerfile
     dockerContext: ./JigdenShakya_02240343_DSO101_A1/backend
+    region: singapore
     plan: free
     envVars:
-      # Auto-injected from the todo-db database below — no manual copy needed
+      - key: DB_HOST
+        value: dpg-d6rb1q9j16oc73f48tgg-a.singapore-postgres.render.com
+      - key: DB_USER
+        value: todo_db_0lmo_user
+      - key: DB_PASSWORD
+        value: PtZoowQdGtYB2Ydz8ozyCXmmWsUBwWEn
+      - key: DB_NAME
+        value: todo_db_0lmo
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_SSL
+        value: "true"
       - key: DATABASE_URL
-        fromDatabase:
-          name: todo-db
-          property: connectionString
+        value: postgresql://todo_db_0lmo_user:PtZoowQdGtYB2Ydz8ozyCXmmWsUBwWEn@dpg-d6rb1q9j16oc73f48tgg-a.singapore-postgres.render.com/todo_db_0lmo
       - key: PORT
-        value: 5000
+        value: "5000"
       - key: NODE_ENV
         value: production
-      # Auto-wired from the fe-todo service host
       - key: FRONTEND_URL
-        fromService:
-          name: fe-todo
-          type: web
-          property: host
+        value: https://fe-todo-github.onrender.com
 
   # ── FRONTEND ─────────────────────────────────────────────────────────────
   - type: web
-    name: fe-todo
-    env: docker
+    name: fe-todo-github
+    runtime: docker
+    branch: main
     dockerfilePath: ./JigdenShakya_02240343_DSO101_A1/frontend/Dockerfile
     dockerContext: ./JigdenShakya_02240343_DSO101_A1/frontend
+    region: singapore
     plan: free
-    # NEXT_PUBLIC_API_URL is hardcoded as ENV in the frontend Dockerfile instead.
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          name: be-todo
-          type: web
-          property: host
-
-# ── DATABASE ─────────────────────────────────────────────────────────────
-databases:
-  - name: todo-db
-    plan: free
-    databaseName: todo_db
-    user: todo_db_0lmo_user
+        value: https://be-todo-github.onrender.com
