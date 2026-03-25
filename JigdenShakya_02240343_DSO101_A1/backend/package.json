@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "test": "jest --runInBand --forceExit"
+    "test": "jest --ci --reporters=default --reporters=jest-junit --runInBand --forceExit"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
     "nodemon": "^3.1.0",
     "prisma": "^5.10.2",
     "supertest": "^6.3.4"
@@ -26,5 +27,9 @@
   "jest": {
     "testEnvironment": "node",
     "testTimeout": 15000
+  },
+  "jest-junit": {
+    "outputDirectory": ".",
+    "outputName": "junit.xml"
   }
 }
