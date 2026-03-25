@@ -28,7 +28,7 @@ pipeline {
         stage('Install Backend') {
             steps {
                 dir("${BE_DIR}") {
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
         stage('Install Frontend') {
             steps {
                 dir("${FE_DIR}") {
-                    sh 'npm install --legacy-peer-deps'
+                    bat 'npm install --legacy-peer-deps'
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir("${FE_DIR}") {
-                    sh 'npm run build'
+                    bat 'npm run build'
                 }
             }
         }
@@ -55,7 +55,7 @@ pipeline {
         stage('Test Backend') {
             steps {
                 dir("${BE_DIR}") {
-                    sh 'npm test'
+                    bat 'npm test'
                 }
             }
             post {
@@ -70,7 +70,7 @@ pipeline {
         stage('Test Frontend') {
             steps {
                 dir("${FE_DIR}") {
-                    sh 'npm test'
+                    bat 'npm test'
                 }
             }
             post {
