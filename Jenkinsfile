@@ -12,7 +12,7 @@ pipeline {
         BE_DIR              = 'JigdenShakya_02240343_DSO101_A1/backend'
         FE_DIR              = 'JigdenShakya_02240343_DSO101_A1/frontend'
         NEXT_PUBLIC_API_URL = 'https://be-todo-github-go7h.onrender.com'
-        DATABASE_URL        = credentials('DATABASE_URL')
+        DATABASE_URL        = 'postgresql://postgres:jigden@localhost:5432/todo_db'
     }
 
     stages {

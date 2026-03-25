@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="2.507">
+  <testsuite name="GET /api/tasks" errors="0" failures="0" skipped="0" timestamp="2026-03-25T15:30:40" time="2.354" tests="6">
+    <testcase classname="GET /api/tasks returns an array of tasks" name="GET /api/tasks returns an array of tasks" time="0.061">
+    </testcase>
+    <testcase classname="POST /api/tasks creates a task successfully" name="POST /api/tasks creates a task successfully" time="0.097">
+    </testcase>
+    <testcase classname="POST /api/tasks returns 400 if title is missing" name="POST /api/tasks returns 400 if title is missing" time="0.008">
+    </testcase>
+    <testcase classname="GET /api/tasks/:id returns 404 for unknown ID" name="GET /api/tasks/:id returns 404 for unknown ID" time="0.012">
+    </testcase>
+    <testcase classname="PUT /api/tasks/:id updates a task" name="PUT /api/tasks/:id updates a task" time="0.021">
+    </testcase>
+    <testcase classname="DELETE /api/tasks/:id deletes a task" name="DELETE /api/tasks/:id deletes a task" time="0.017">
+    </testcase>
+  </testsuite>
+</testsuites>
