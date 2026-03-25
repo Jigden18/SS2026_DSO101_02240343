@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="9" failures="0" errors="0" time="3.904">
+  <testsuite name="TaskList" errors="0" failures="0" skipped="0" timestamp="2026-03-25T16:14:01" time="1.449" tests="5">
+    <testcase classname="TaskList renders a list of tasks" name="TaskList renders a list of tasks" time="0.068">
+    </testcase>
+    <testcase classname="TaskList shows empty state message when list is empty" name="TaskList shows empty state message when list is empty" time="0.003">
+    </testcase>
+    <testcase classname="TaskList shows loading spinner while loading" name="TaskList shows loading spinner while loading" time="0.003">
+    </testcase>
+    <testcase classname="TaskList calls onEdit when Edit is clicked" name="TaskList calls onEdit when Edit is clicked" time="0.069">
+    </testcase>
+    <testcase classname="TaskList calls onDelete when Delete is clicked" name="TaskList calls onDelete when Delete is clicked" time="0.026">
+    </testcase>
+  </testsuite>
+  <testsuite name="TaskForm" errors="0" failures="0" skipped="0" timestamp="2026-03-25T16:14:01" time="1.498" tests="4">
+    <testcase classname="TaskForm renders all form fields" name="TaskForm renders all form fields" time="0.117">
+    </testcase>
+    <testcase classname="TaskForm shows validation error when title is empty on submit" name="TaskForm shows validation error when title is empty on submit" time="0.027">
+    </testcase>
+    <testcase classname="TaskForm calls onSubmit with correct data when title is provided" name="TaskForm calls onSubmit with correct data when title is provided" time="0.051">
+    </testcase>
+    <testcase classname="TaskForm renders in edit mode when editingTask is provided" name="TaskForm renders in edit mode when editingTask is provided" time="0.027">
+    </testcase>
+  </testsuite>
+</testsuites>
