@@ -13,19 +13,19 @@ services:
     plan: free
     envVars:
       - key: DB_HOST
-        value: dpg-d6rb1q9j16oc73f48tgg-a.singapore-postgres.render.com
+        sync: false
       - key: DB_USER
-        value: todo_db_0lmo_user
+        sync: false
       - key: DB_PASSWORD
-        value: PtZoowQdGtYB2Ydz8ozyCXmmWsUBwWEn
+        sync: false
       - key: DB_NAME
-        value: todo_db_0lmo
+        sync: false
       - key: DB_PORT
         value: "5432"
       - key: DB_SSL
         value: "true"
       - key: DATABASE_URL
-        value: postgresql://todo_db_0lmo_user:PtZoowQdGtYB2Ydz8ozyCXmmWsUBwWEn@dpg-d6rb1q9j16oc73f48tgg-a.singapore-postgres.render.com/todo_db_0lmo
+        sync: false
       - key: PORT
         value: "5000"
       - key: NODE_ENV

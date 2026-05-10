@@ -3,6 +3,16 @@ const router = express.Router();
 const { getAllTasks, getTaskById, createTask, updateTask, deleteTask } = require('../controllers/taskController');
 const { validateCreateTask, validateUpdateTask } = require('../middleware/validateTask');
 
+
+router.get('/test',
+(req, res) => {
+  res.json({ 
+    success: true, 
+    message: 'Task routes are working!' });
+}
+
+
+)
 router.get('/', getAllTasks);
 router.get('/:id', getTaskById);
 router.post('/', validateCreateTask, createTask);
