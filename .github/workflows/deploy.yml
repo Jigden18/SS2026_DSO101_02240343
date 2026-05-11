@@ -1,0 +1,51 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Log in to DockerHub
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 3. Build and push the backend image
+      #    Context is ./backend so Docker uses backend/Dockerfile
+      - name: Build and Push Backend Image
+        run: |
+          docker build \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/be-todo:02240343 \
+            ./JigdenShakya_02240343_DSO101_A1/backend
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/be-todo:02240343
+
+      # 4. Build and push the frontend image
+      #    Pass the production backend Render URL as a build argument
+      #    so Next.js bakes it into the compiled JS bundle
+      - name: Build and Push Frontend Image
+        run: |
+          docker build \
+            --build-arg NEXT_PUBLIC_API_URL=${{ secrets.BACKEND_RENDER_URL }} \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/fe-todo:02240343 \
+            ./JigdenShakya_02240343_DSO101_A1/frontend
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/fe-todo:02240343
+
+      # 5. Tell Render to pull the new backend image and redeploy
+      - name: Trigger Backend Render Deployment
+        run: |
+          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
+
+      # 6. Tell Render to pull the new frontend image and redeploy
+      - name: Trigger Frontend Render Deployment
+        run: |
+          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}"
