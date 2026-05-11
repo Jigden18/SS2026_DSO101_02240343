@@ -7,8 +7,8 @@ pipeline {
 
     environment {
         DOCKERHUB_USERNAME  = 'jigden18'
-        BE_IMAGE            = 'jigden18/be-todo:02240343'
-        FE_IMAGE            = 'jigden18/fe-todo:02240343'
+        BE_IMAGE            = 'jigden18/be-todo:latest'
+        FE_IMAGE            = 'jigden18/fe-todo:latest'
         BE_DIR              = 'JigdenShakya_02240343_DSO101_A1/backend'
         FE_DIR              = 'JigdenShakya_02240343_DSO101_A1/frontend'
         NEXT_PUBLIC_API_URL = 'https://be-todo-github-go7h.onrender.com'
