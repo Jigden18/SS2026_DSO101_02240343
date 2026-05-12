@@ -20,7 +20,7 @@ To configure a **Jenkins pipeline** to automate the **build, test**, and **deplo
 
 | Tool | Purpose |
 |------|---------|
-| Jenkins | CI/CD automation |
+| Jenkins | CI and delivery automation |
 | GitHub | Source code hosting |
 | Node.js & npm | JavaScript runtime & package manager |
 | Jest + jest-junit | Testing framework with JUnit reporting |
